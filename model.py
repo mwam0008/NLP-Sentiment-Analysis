@@ -192,11 +192,11 @@ def analyze_textblob(text: str) -> dict:
         subjectivity = analysis.sentiment.subjectivity
 
         if polarity >= 0.05:
-            label = "Positive 😊"
+            label = "Positive"
         elif polarity <= -0.05:
-            label = "Negative 😞"
+            label = "Negative"
         else:
-            label = "Neutral 😐"
+            label = "Neutral"
 
         logging.info(f"TextBlob sentiment: {label} ({polarity:.3f})")
         return {
@@ -220,11 +220,11 @@ def analyze_vader(text: str) -> dict:
         compound = scores['compound']
 
         if compound >= 0.05:
-            label = "Positive 😊"
+            label = "Positive"
         elif compound <= -0.05:
-            label = "Negative 😞"
+            label = "Negative"
         else:
-            label = "Neutral 😐"
+            label = "Neutral"
 
         logging.info(f"VADER sentiment: {label} ({compound:.3f})")
         return {
