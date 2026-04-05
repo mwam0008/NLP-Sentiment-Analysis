@@ -34,7 +34,7 @@ st.set_page_config(
 )
 
 st.title("NLP Sentiment Analysis")
-st.markdown("Analyze text using **Natural Language Processing** — clean it, process it, and detect its sentiment.")
+st.markdown("Analyze text using **Natural Language Processing** - clean it, process it, and detect its sentiment.")
 
 # ── Sidebar Navigation ────────────────────────────────────────
 st.sidebar.title("Navigation")
