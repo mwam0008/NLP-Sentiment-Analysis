@@ -1,4 +1,4 @@
-# 💬 NLP Sentiment Analysis App
+# NLP Sentiment Analysis App
 
 A Streamlit web app that performs **Natural Language Processing** and **Sentiment Analysis** on any text input.
 
@@ -50,7 +50,3 @@ nlp_app/
 - **TextBlob** — simple sentiment polarity and subjectivity
 - **Streamlit** — web app framework
 
-## Course
-
-CST2216 — Machine Learning 2: Advanced Models and Emerging Topics
-Algonquin College
