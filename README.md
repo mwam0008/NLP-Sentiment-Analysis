@@ -46,7 +46,7 @@ nlp_app/
 
 ## Key Libraries
 
-- **NLTK** — tokenization, stop words, lemmatization, VADER sentiment
-- **TextBlob** — simple sentiment polarity and subjectivity
-- **Streamlit** — web app framework
+- **NLTK** - tokenization, stop words, lemmatization, VADER sentiment
+- **TextBlob** - simple sentiment polarity and subjectivity
+- **Streamlit** - web app framework
 
