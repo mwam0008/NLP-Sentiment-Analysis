@@ -30,27 +30,26 @@ from utils import (
 # ── Page Config ───────────────────────────────────────────────
 st.set_page_config(
     page_title="NLP Sentiment Analyzer",
-    page_icon="💬",
     layout="wide"
 )
 
-st.title("💬 NLP Sentiment Analysis")
+st.title("NLP Sentiment Analysis")
 st.markdown("Analyze text using **Natural Language Processing** — clean it, process it, and detect its sentiment.")
 
 # ── Sidebar Navigation ────────────────────────────────────────
-st.sidebar.title("📂 Navigation")
+st.sidebar.title("Navigation")
 section = st.sidebar.radio("Choose a section:", [
-    "📖 What is NLP?",
-    "🧹 Text Preprocessing Pipeline",
-    "😊 Sentiment Analysis",
-    "🔬 Compare Two Texts",
+    "What is NLP?",
+    "Text Preprocessing Pipeline",
+    "Sentiment Analysis",
+    "Compare Two Texts",
 ])
 
 # ════════════════════════════════════════════════════════════
-# SECTION 1 — What is NLP?
+# SECTION 1 - What is NLP?
 # ════════════════════════════════════════════════════════════
-if section == "📖 What is NLP?":
-    st.header("📖 What is NLP?")
+if section == "What is NLP?":
+    st.header("What is NLP?")
 
     st.markdown("""
     **Natural Language Processing (NLP)** is how computers understand and work with human language.
@@ -81,18 +80,18 @@ if section == "📖 What is NLP?":
     > **Polarity:** -1 = very negative, 0 = neutral, +1 = very positive
     """)
 
-    st.info("👈 Use the sidebar to try the **Text Preprocessing Pipeline** or **Sentiment Analysis** sections!")
+    st.info("Use the sidebar to try the **Text Preprocessing Pipeline** or **Sentiment Analysis** sections!")
 
 # ════════════════════════════════════════════════════════════
-# SECTION 2 — Text Preprocessing Pipeline
+# SECTION 2 - Text Preprocessing Pipeline
 # ════════════════════════════════════════════════════════════
-elif section == "🧹 Text Preprocessing Pipeline":
-    st.header("🧹 Text Preprocessing Pipeline")
+elif section == "Text Preprocessing Pipeline":
+    st.header("Text Preprocessing Pipeline")
     st.markdown("Paste any text and watch it get cleaned step by step!")
 
     default_text = "Natural Language Processing (NLP) is making machines understand human language. It's an exciting field of AI and ML! Running, runs, and ran are all forms of 'run'."
 
-    user_text = st.text_area("✏️ Enter your text here:", value=default_text, height=120)
+    user_text = st.text_area("Enter your text here:", value=default_text, height=120)
 
     col1, col2 = st.columns(2)
     use_stemming = col1.checkbox("Use Stemming (faster, cruder)", value=False)
@@ -102,15 +101,15 @@ elif section == "🧹 Text Preprocessing Pipeline":
         st.warning("Both selected — will use Lemmatization.")
         use_stemming = False
 
-    if st.button("🚀 Run Pipeline"):
+    if st.button("Run Pipeline"):
         with st.spinner("Processing text..."):
             try:
                 steps = full_pipeline(user_text, use_stemming=use_stemming)
 
-                st.success("✅ Pipeline complete!")
+                st.success("Pipeline complete!")
 
                 # Step-by-step display
-                st.subheader("📋 Step-by-Step Results")
+                st.subheader("Step-by-Step Results")
 
                 with st.expander("Step 1 — Lowercase", expanded=True):
                     st.code(steps['lowercase'])
@@ -137,28 +136,28 @@ elif section == "🧹 Text Preprocessing Pipeline":
                 with st.expander("Step 6 — Expanded Acronyms (Final)"):
                     st.write(steps.get('expanded', steps['final_tokens']))
 
-                st.subheader("📊 Token Count at Each Step")
+                st.subheader("Token Count at Each Step")
                 fig = plot_token_count_comparison(steps)
                 st.pyplot(fig)
 
-                st.subheader("🔤 Top Words in Your Text")
+                st.subheader("Top Words in Your Text")
                 fig2 = plot_top_words(steps['final_tokens'], n=10)
                 if fig2:
                     st.pyplot(fig2)
                 else:
                     st.info("Not enough words to show top words chart.")
 
-                st.subheader("✅ Final Cleaned Text")
+                st.subheader("Final Cleaned Text")
                 st.success(steps['final_text'])
 
             except Exception as e:
-                st.error(f"❌ Pipeline failed: {e}")
+                st.error(f"Pipeline failed: {e}")
 
 # ════════════════════════════════════════════════════════════
-# SECTION 3 — Sentiment Analysis
+# SECTION 3 - Sentiment Analysis
 # ════════════════════════════════════════════════════════════
-elif section == "😊 Sentiment Analysis":
-    st.header("😊 Sentiment Analysis")
+elif section == "Sentiment Analysis":
+    st.header("Sentiment Analysis")
     st.markdown("Enter any text and find out if it's **positive**, **negative**, or **neutral**.")
 
     examples = {
@@ -172,11 +171,11 @@ elif section == "😊 Sentiment Analysis":
     selected = st.selectbox("Try an example or write your own:", list(examples.keys()))
     default = examples[selected]
 
-    user_text = st.text_area("✏️ Your text:", value=default, height=120)
+    user_text = st.text_area("Your text:", value=default, height=120)
 
     run_preprocess = st.checkbox("Clean text before analyzing (recommended)", value=True)
 
-    if st.button("🔍 Analyze Sentiment"):
+    if st.button("Analyze Sentiment"):
         if not user_text.strip():
             st.warning("Please enter some text first!")
         else:
@@ -186,12 +185,12 @@ elif section == "😊 Sentiment Analysis":
                     if run_preprocess:
                         steps = full_pipeline(user_text)
                         analysis_text = steps['final_text']
-                        st.info(f"📝 Cleaned text used for analysis: *{analysis_text}*")
+                        st.info(f"Cleaned text used for analysis: *{analysis_text}*")
                     else:
                         analysis_text = user_text
 
                     # TextBlob analysis
-                    st.subheader("🔵 TextBlob Analysis")
+                    st.subheader("TextBlob Analysis")
                     tb = analyze_textblob(analysis_text)
 
                     col1, col2, col3 = st.columns(3)
@@ -210,7 +209,7 @@ elif section == "😊 Sentiment Analysis":
                     st.divider()
 
                     # VADER analysis
-                    st.subheader("🟣 NLTK VADER Analysis")
+                    st.subheader("NLTK VADER Analysis")
                     vader = analyze_vader(analysis_text)
 
                     col1, col2, col3, col4 = st.columns(4)
@@ -231,20 +230,20 @@ elif section == "😊 Sentiment Analysis":
                     """)
 
                 except Exception as e:
-                    st.error(f"❌ Analysis failed: {e}")
+                    st.error(f"Analysis failed: {e}")
 
 # ════════════════════════════════════════════════════════════
-# SECTION 4 — Compare Two Texts
+# SECTION 4 - Compare Two Texts
 # ════════════════════════════════════════════════════════════
-elif section == "🔬 Compare Two Texts":
-    st.header("🔬 Compare Sentiment of Two Texts")
+elif section == "Compare Two Texts":
+    st.header("Compare Sentiment of Two Texts")
     st.markdown("Enter two texts and compare their sentiment scores side by side.")
 
     col1, col2 = st.columns(2)
-    text1 = col1.text_area("📝 Text 1:", value="I love this! It's amazing and wonderful.", height=100)
-    text2 = col2.text_area("📝 Text 2:", value="I hate this. It's terrible and broken.", height=100)
+    text1 = col1.text_area("Text 1:", value="I love this! It's amazing and wonderful.", height=100)
+    text2 = col2.text_area("Text 2:", value="I hate this. It's terrible and broken.", height=100)
 
-    if st.button("⚖️ Compare"):
+    if st.button("Compare"):
         if not text1.strip() or not text2.strip():
             st.warning("Please enter both texts!")
         else:
@@ -259,7 +258,7 @@ elif section == "🔬 Compare Two Texts":
                     v1 = analyze_vader(steps1['final_text'])
                     v2 = analyze_vader(steps2['final_text'])
 
-                    st.subheader("📊 TextBlob Comparison")
+                    st.subheader("TextBlob Comparison")
                     c1, c2 = st.columns(2)
                     with c1:
                         st.markdown("**Text 1**")
@@ -274,7 +273,7 @@ elif section == "🔬 Compare Two Texts":
 
                     st.divider()
 
-                    st.subheader("📊 VADER Comparison")
+                    st.subheader("VADER Comparison")
                     c1, c2 = st.columns(2)
                     with c1:
                         st.markdown("**Text 1**")
@@ -290,9 +289,9 @@ elif section == "🔬 Compare Two Texts":
                         st.pyplot(fig)
 
                 except Exception as e:
-                    st.error(f"❌ Comparison failed: {e}")
+                    st.error(f"Comparison failed: {e}")
 
 # ── Footer ────────────────────────────────────────────────────
 st.sidebar.markdown("---")
-st.sidebar.markdown("**CST2216 — Individual Term Project**")
+st.sidebar.markdown("**Project**")
 st.sidebar.markdown("NLP Sentiment Analysis App")
