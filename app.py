@@ -111,29 +111,29 @@ elif section == "Text Preprocessing Pipeline":
                 # Step-by-step display
                 st.subheader("Step-by-Step Results")
 
-                with st.expander("Step 1 — Lowercase", expanded=True):
+                with st.expander("Step 1 - Lowercase", expanded=True):
                     st.code(steps['lowercase'])
 
-                with st.expander("Step 2 — Tokenized"):
+                with st.expander("Step 2 - Tokenized"):
                     st.write(steps['tokens'])
                     st.caption(f"Total tokens: {len(steps['tokens'])}")
 
-                with st.expander("Step 3 — Remove Punctuation"):
+                with st.expander("Step 3 - Remove Punctuation"):
                     st.write(steps['no_punctuation'])
                     st.caption(f"Tokens remaining: {len(steps['no_punctuation'])}")
 
-                with st.expander("Step 4 — Remove Stop Words"):
+                with st.expander("Step 4 - Remove Stop Words"):
                     st.write(steps['no_stopwords'])
                     st.caption(f"Tokens remaining: {len(steps['no_stopwords'])}")
 
                 if 'stemmed' in steps:
-                    with st.expander("Step 5 — Stemmed Tokens"):
+                    with st.expander("Step 5 - Stemmed Tokens"):
                         st.write(steps['stemmed'])
                 elif 'lemmatized' in steps:
-                    with st.expander("Step 5 — Lemmatized Tokens"):
+                    with st.expander("Step 5 - Lemmatized Tokens"):
                         st.write(steps['lemmatized'])
 
-                with st.expander("Step 6 — Expanded Acronyms (Final)"):
+                with st.expander("Step 6 - Expanded Acronyms (Final)"):
                     st.write(steps.get('expanded', steps['final_tokens']))
 
                 st.subheader("Token Count at Each Step")
